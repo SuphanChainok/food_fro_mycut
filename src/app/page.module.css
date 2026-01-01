@@ -1,31 +1,49 @@
 .page {
-  --bg: #fbfbfd;
+  --bg: #f6f7fb;
   --card: #ffffff;
+  --text: #111827;
   --muted: #6b7280;
-  --accent: #6b21a8;
-  --accent-600: #7c3aed;
-  background: var(--bg);
+  --accent: #7c3aed;
+  --accent-soft: rgba(124, 58, 237, 0.12);
+
   min-height: 100vh;
-  width: 100%;
+  background: var(--bg);
   font-family: var(--font-geist-sans);
-  padding: 16px;
+  padding: 20px;
+  color: var(--text);
 }
 
 .container {
-  max-width: 720px;
-  margin: 0 auto;
+  max-width: 760px;
+  margin: auto;
 }
 
+/* ---------- Header ---------- */
 .hero {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px;
+  margin-bottom: 20px;
+}
+
+.avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ede9fe, #f5f3ff);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
 }
 
 .title {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 800;
 }
 
 .subtitle {
@@ -33,55 +51,94 @@
   color: var(--muted);
 }
 
-.avatar-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
 }
 
-.avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 12px;
-  background: linear-gradient(180deg, rgba(124,58,237,0.12), rgba(124,58,237,0.02));
-  display: grid;
-  place-items: center;
-  box-shadow: 0 6px 18px rgba(16,24,40,0.06);
-}
-
+/* ---------- Cards ---------- */
 .card-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 14px;
 }
 
 .card {
   background: var(--card);
-  border-radius: 12px;
-  padding: 12px;
-  box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(17, 24, 39, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.big-cta { display:flex; gap:10px; margin-top:16px }
-.btn { flex:1; padding:12px 14px; border-radius:12px; text-align:center; font-weight:700; color:#fff; background: linear-gradient(90deg,var(--accent-600),#6d28d9); box-shadow: 0 8px 24px rgba(99,102,241,0.12) }
-.btn.icon { display:inline-flex; gap:8px; align-items:center; justify-content:center }
-.secondary { background: transparent; color: var(--accent-600); border: 1px solid rgba(124,58,237,0.12); box-shadow: none }
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(17, 24, 39, 0.1);
+}
 
-.chip { display:inline-block; padding:6px 8px; border-radius:999px; font-size:13px; background: rgba(15,23,42,0.03); color:var(--muted); margin-left:8px }
+.cardTitle {
+  font-weight: 700;
+  margin-bottom: 6px;
+}
 
+.cardValue {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+/* ---------- Buttons ---------- */
+.bigCta {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.btn {
+  flex: 1;
+  padding: 14px;
+  border-radius: 16px;
+  text-align: center;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.primary {
+  color: #fff;
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  box-shadow: 0 12px 30px rgba(124, 58, 237, 0.35);
+}
+
+.secondary {
+  color: var(--accent);
+  background: #fff;
+  border: 1px solid var(--accent-soft);
+}
+
+/* ---------- Responsive ---------- */
 @media (max-width: 640px) {
   .card-grid {
     grid-template-columns: 1fr;
   }
-
-  .hero {
-    padding: 10px 4px;
-  }
-
-  .title { font-size: 18px }
 }
 
+/* ---------- Dark mode ---------- */
 @media (prefers-color-scheme: dark) {
-  .page { --bg: #07070a; --card: #0b1220; --muted: #9ca3af; --accent-600: #8b5cf6 }
+  .page {
+    --bg: #07070a;
+    --card: #0b1220;
+    --text: #f9fafb;
+    --muted: #9ca3af;
+    --accent: #8b5cf6;
+    --accent-soft: rgba(139, 92, 246, 0.18);
+  }
 }
