@@ -1,0 +1,81 @@
+:root {
+  --bg-card: #ffffff;
+  --muted: #6b7280;
+  --surface: #fafafa;
+  --shadow: 0 6px 18px rgba(16,24,40,0.06);
+  --accent-gradient: linear-gradient(180deg, rgba(124,58,237,0.08), rgba(124,58,237,0.02));
+}
+
+.main {
+  padding: 16px;
+}
+
+.title {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  color: #111827;
+}
+
+.statusGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.chartWrapper {
+  margin-top: 16px;
+}
+
+.card {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--bg-card);
+  box-shadow: var(--shadow);
+}
+
+.cardHeader {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.emptyText {
+  color: var(--muted);
+}
+
+.feedList {
+  display: grid;
+  gap: 8px;
+}
+
+.feedItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.feedLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.feedAmount {
+  font-weight: 700;
+  color: #111827;
+}
+
+.feedNotes {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.feedTime {
+  font-size: 12px;
+  color: var(--muted);
+}
