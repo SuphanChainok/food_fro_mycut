@@ -84,6 +84,14 @@ function Sidebar() {
           <span className={styles.navIcon}>🐱</span>
           <span className={styles.navText}>My Cats</span>
         </a>
+        <a href="/monitoring" className={styles.navItem}>
+          <span className={styles.navIcon}>📊</span>
+          <span className={styles.navText}>Monitoring</span>
+        </a>
+        <a href="/settings" className={styles.navItem}>
+          <span className={styles.navIcon}>⚙️</span>
+          <span className={styles.navText}>Settings</span>
+        </a>
       </nav>
 
       <div className={styles.sidebarFooter}>
