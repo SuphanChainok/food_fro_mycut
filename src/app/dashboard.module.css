@@ -12,11 +12,9 @@
   --warning-light: #fef3c7;
   --info: #3b82f6;
   --info-light: #dbeafe;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.08);
-  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.12);
-  
+
   min-height: 100vh;
   background: var(--bg);
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
@@ -25,7 +23,7 @@
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -49,7 +47,6 @@
   display: grid;
   place-items: center;
   box-shadow: var(--shadow-lg);
-  position: relative;
 }
 
 .avatarIcon {
@@ -191,8 +188,15 @@
   color: var(--text);
 }
 
-/* Main Card */
-.mainCard {
+/* Main Grid */
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 24px;
+}
+
+/* Progress Card */
+.progressCard {
   background: var(--card);
   border-radius: 24px;
   padding: 28px;
@@ -201,14 +205,14 @@
   border: 1px solid var(--border);
 }
 
-.mainCardHeader {
+.cardHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
 }
 
-.mainCardTitle {
+.cardTitle {
   font-size: 20px;
   font-weight: 700;
 }
@@ -264,7 +268,7 @@
 
 .detailsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
@@ -292,7 +296,6 @@
   border-radius: 24px;
   padding: 28px;
   box-shadow: var(--shadow-lg);
-  margin-bottom: 24px;
   border: 1px solid var(--border);
 }
 
@@ -304,7 +307,7 @@
 
 .actionsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 14px;
 }
 
@@ -323,6 +326,7 @@
   background: linear-gradient(135deg, var(--primary), #6d28d9);
   color: white;
   box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+  grid-column: 1 / -1;
 }
 
 .actionPrimary:hover {
@@ -373,8 +377,47 @@
   opacity: 0.8;
 }
 
-/* Schedule Card */
-.scheduleCard {
+/* Chart Card */
+.chartCard {
+  background: var(--card);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+}
+
+.chartPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  background: var(--bg);
+  border-radius: 16px;
+  border: 2px dashed var(--border);
+}
+
+.chartIcon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.chartText {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.chartSubtext {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Activity Card */
+.activityCard {
   background: var(--card);
   border-radius: 24px;
   padding: 28px;
@@ -382,19 +425,7 @@
   border: 1px solid var(--border);
 }
 
-.scheduleHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.scheduleTitle {
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.scheduleLink {
+.viewAllLink {
   font-size: 14px;
   color: var(--primary);
   font-weight: 600;
@@ -402,78 +433,132 @@
   transition: opacity 0.2s;
 }
 
-.scheduleLink:hover {
+.viewAllLink:hover {
   opacity: 0.8;
 }
 
-.scheduleList {
+/* Loading State */
+.loadingState {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-}
-
-.scheduleItem {
-  display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 16px;
-  border-radius: 14px;
-  background: var(--bg);
-  transition: all 0.2s ease;
+  justify-content: center;
+  padding: 40px 24px;
 }
 
-.scheduleItem:hover {
-  background: var(--border);
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 12px;
 }
 
-.scheduleItem.completed {
-  opacity: 0.6;
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-.scheduleItem.upcoming {
-  border: 2px solid var(--primary);
-  background: var(--primary-light);
-}
-
-.scheduleTime {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text);
-  min-width: 50px;
-}
-
-.scheduleContent {
-  flex: 1;
-  min-width: 0;
-}
-
-.scheduleName {
+.loadingText {
   font-size: 14px;
+  color: var(--text-muted);
   font-weight: 600;
-  margin-bottom: 2px;
 }
 
-.scheduleAmount {
-  font-size: 12px;
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.4;
+}
+
+.emptyText {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.emptySubtext {
+  font-size: 13px;
   color: var(--text-muted);
 }
 
-.scheduleStatus {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+/* Activity List */
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.activityItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: var(--bg);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.activityItem:hover {
+  background: var(--border);
+}
+
+.activityIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--primary-light);
   display: grid;
   place-items: center;
-  font-size: 16px;
-  background: var(--success-light);
+  font-size: 20px;
   flex-shrink: 0;
 }
 
-.upcoming .scheduleStatus {
-  background: var(--primary-light);
+.activityContent {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.activityAmount {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.activityTime {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .actionsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .actionPrimary {
+    grid-column: 1;
+  }
+}
+
 @media (max-width: 768px) {
   .page {
     padding: 20px 16px;
@@ -487,12 +572,8 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .actionsGrid {
-    grid-template-columns: 1fr;
-  }
-
   .detailsGrid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 }
 
@@ -501,8 +582,9 @@
     grid-template-columns: 1fr;
   }
 
-  .detailsGrid {
-    grid-template-columns: 1fr;
+  .hero {
+    flex-direction: column;
+    text-align: center;
   }
 }
 
@@ -522,10 +604,8 @@
     --warning-light: #78350f;
     --info: #3b82f6;
     --info-light: #1e3a8a;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.5);
-    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.6);
   }
 
   .avatar {
