@@ -1,9 +1,20 @@
+// src/app/api/ai/route.ts
+
 import { NextResponse } from 'next/server'
-import { calculateFood } from '../../../../utils/calculator'
+import { calculateFood } from '@/utils/calculator'
 
 export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}))
-  const { weightKg = 4, ageMonths = 24, activity = 'normal' } = body
-  const grams = calculateFood(Number(weightKg), Number(ageMonths), activity)
-  return NextResponse.json({ data: { grams } })
+  const { weightKg, ageMonths } = body
+
+  if (!weightKg || !ageMonths) {
+    return NextResponse.json(
+      { error: 'Missing weightKg or ageMonths' },
+      { status: 400 }
+    )
+  }
+
+  const amount = calculateFood(Number(weightKg), Number(ageMonths))
+
+  return NextResponse.json({ amount })
 }
